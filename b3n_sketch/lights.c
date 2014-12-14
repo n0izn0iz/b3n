@@ -38,3 +38,33 @@ s_b3n_light*	b3n_create_lights(void)
 	light->next = NULL;
 	return (first);
 }
+
+#ifdef B3N_SIMULATOR
+void		b3n_destroy_lights(s_b3n_light** light)
+{
+	s_b3n_light* curr;
+	s_b3n_light* tmp;
+
+	curr = *light;
+	while (curr != NULL)
+	{
+		tmp = curr->next;
+		free(curr);
+		curr = tmp;
+	}
+	*light = NULL;
+}
+
+void		b3n_draw_lights(s_b3n_env* env)
+{
+	s_b3n_light*	light;
+
+	light = env->lights;
+	while(light != NULL)
+	{
+		b3n_draw_circle(light->x, light->y, light->size, 0xFFFFFF, env);
+		b3n_draw_circleofcircles(light->x, light->y, light->size, light->angle, light->color, light->led_nbr, env);
+		light = light->next;
+	}
+}
+#endif

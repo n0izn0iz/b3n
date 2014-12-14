@@ -1,6 +1,6 @@
-#include <stdlib.h>
-
 #include "b3n.h"
+
+#define COL_NBR 5
 
 void		b3n_update_colors(s_b3n_env* env)
 {
@@ -9,7 +9,7 @@ void		b3n_update_colors(s_b3n_env* env)
 	int						curr_color;
 	s_b3n_light*			light;
 
-	curr_color = (tick_count / 2000) % 5;
+	curr_color = (tick_count / 200) % 5;
 	light = env->lights;
 	while (light != NULL)
 	{

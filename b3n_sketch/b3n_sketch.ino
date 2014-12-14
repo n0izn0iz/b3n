@@ -29,23 +29,23 @@ const int config = WS2811_GRB | WS2811_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 
-s_b3n_env env;
+s_b3n_light* lights;
 
 void setup() {
-  env.lights = b3n_create_lights();
+  lights = b3n_create_lights();
   leds.begin();
   leds.show();
 }
 
 void loop() {
-  b3n_update_colors(&env);
-  s_b3n_light* light = env.lights;
+  b3n_update_colors(lights);
+  s_b3n_light* light = lights;
   int  curr_led = 0;
   while (light != NULL)
   {
     int i;
     for (i=0; i < light->led_nbr; i++) {
-      leds.setPixel(curr_led + i, env.lights->color);
+      leds.setPixel(curr_led + i, light->color);
     }
     curr_led += i + (ledsPerStrip - light->led_nbr);
     light = light->next;

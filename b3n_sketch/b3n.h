@@ -1,6 +1,8 @@
 #ifndef B3N_H
 # define B3N_H
 
+# include "stdint.h"
+
 # ifdef B3N_SIMULATOR
 #  include <stdbool.h>
 #  include <SDL2/SDL.h>
@@ -22,21 +24,21 @@ typedef struct			t_b3n_light
 	int32_t					color;
 }						s_b3n_light;
 
+# ifdef B3N_SIMULATOR
 typedef struct			t_b3n_env
 {
-# ifdef B3N_SIMULATOR
 	bool		running;
 	SDL_Window*	window;
 	SDL_Renderer*	renderer;
 	SDL_Texture*	texture;
 	int32_t		pixels[WIN_WIDTH * WIN_HEIGHT];
-# endif
 	s_b3n_light*	lights;
 }						s_b3n_env;
+# endif
 
 s_b3n_light*			b3n_create_lights(void);
 
-void					b3n_update_colors(s_b3n_env* env);
+void					b3n_update_colors(s_b3n_light* lights);
 
 # ifdef B3N_SIMULATOR
 void					b3n_destroy_lights(s_b3n_light** light);

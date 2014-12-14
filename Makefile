@@ -1,4 +1,4 @@
-NAME	=b3n_sim
+NAME	=b3n
 SRCS	=$(wildcard srcs/*.c)
 OBJS	=$(patsubst srcs/%.c,objs/%.o,$(SRCS))
 HDRS	=includes

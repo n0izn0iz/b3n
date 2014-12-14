@@ -58,7 +58,7 @@ int		main(void)
 	while(env.running)
 	{
 		b3n_handle_events(&env);
-		b3n_update_colors(&env);
+		b3n_update_colors(env.lights);
 		b3n_draw_lights(&env);
 		b3n_update_window(&env);
 	}

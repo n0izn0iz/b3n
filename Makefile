@@ -2,7 +2,7 @@ NAME	=b3n
 SRCS	=$(wildcard srcs/*.c)
 OBJS	=$(patsubst srcs/%.c,objs/%.o,$(SRCS))
 HDRS	=includes
-C_FLAGS	=-Wall -Wextra -Werror
+C_FLAGS	=-Wall -Wextra -Werror -DB3N_SIMULATOR
 LD_FLAGS=-lSDL2 -lm
 
 all: $(NAME)
@@ -11,7 +11,7 @@ $(NAME): $(OBJS)
 	gcc -o $@ $^ $(LD_FLAGS)
 
 objs/%.o: srcs/%.c
-	gcc -o $@ -c $^ $(C_FLAGS) -I $(HDRS)
+	gcc -o $@ -c $^ $(C_FLAGS) -I$(HDRS)
 
 clean:
 	rm -f $(OBJS)

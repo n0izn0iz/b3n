@@ -21,7 +21,7 @@ typedef struct			t_b3n_light
 	int						x;
 	int						y;
 	struct t_b3n_light*		next;
-	int32_t					color;
+	int32_t*				colors;
 }						s_b3n_light;
 
 # ifdef B3N_SIMULATOR
@@ -45,7 +45,7 @@ void					b3n_destroy_lights(s_b3n_light** light);
 void					b3n_draw_lights(s_b3n_env* env);
 
 void					b3n_draw_circle(int x, int y, unsigned int size, int32_t color, s_b3n_env* env);
-void					b3n_draw_circleofcircles(int x, int y, unsigned int size, float angle, int32_t color, unsigned int nbr, s_b3n_env* env);
+void					b3n_draw_circleofcircles(int x, int y, unsigned int size, float angle, int32_t* colors, unsigned int nbr, s_b3n_env* env);
 # endif
 
 #endif

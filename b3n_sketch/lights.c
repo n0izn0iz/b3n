@@ -36,6 +36,12 @@ s_b3n_light*	b3n_create_lights(void)
 	light->x = -size;
 	light->y = yoffset;
 	light->next = NULL;
+	light = first;
+	while(light)
+	{
+		light->colors = malloc(sizeof(int32_t) * light->led_nbr);
+		light = light->next;
+	}
 	return (first);
 }
 
@@ -48,6 +54,7 @@ void		b3n_destroy_lights(s_b3n_light** light)
 	curr = *light;
 	while (curr != NULL)
 	{
+		free(curr->colors);
 		tmp = curr->next;
 		free(curr);
 		curr = tmp;
@@ -63,7 +70,7 @@ void		b3n_draw_lights(s_b3n_env* env)
 	while(light != NULL)
 	{
 		b3n_draw_circle(light->x, light->y, light->size, 0xFFFFFF, env);
-		b3n_draw_circleofcircles(light->x, light->y, light->size, light->angle, light->color, light->led_nbr, env);
+		b3n_draw_circleofcircles(light->x, light->y, light->size, light->angle, light->colors, light->led_nbr, env);
 		light = light->next;
 	}
 }

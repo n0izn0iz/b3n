@@ -29,7 +29,7 @@ void		b3n_draw_circle(int x, int y, unsigned int size, int32_t color, s_b3n_env*
 	}
 }
 
-void		b3n_draw_circleofcircles(int x, int y, unsigned int size, float angle, int32_t color, unsigned int nbr, s_b3n_env* env)
+void		b3n_draw_circleofcircles(int x, int y, unsigned int size, float angle, int32_t* colors, unsigned int nbr, s_b3n_env* env)
 {
 	float				offset;
 	unsigned int		i;
@@ -40,7 +40,7 @@ void		b3n_draw_circleofcircles(int x, int y, unsigned int size, float angle, int
 	i = 0;
 	while (i < nbr)
 	{
-		b3n_draw_circle(x + (size * cos(RAD(angle + (i * offset)))), y + (size * sin(RAD(angle + (i * offset)))), (size * M_PI) / nbr, color, env);
+		b3n_draw_circle(x + (size * cos(RAD(angle + (i * offset)))), y + (size * sin(RAD(angle + (i * offset)))), (size * M_PI) / nbr, colors[i], env);
 		i++;
 	}
 }

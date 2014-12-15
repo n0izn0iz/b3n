@@ -14,14 +14,18 @@ void		b3n_put_pixel(int32_t color, unsigned int x, unsigned int y, s_b3n_env* en
 void		b3n_draw_circle(int x, int y, unsigned int size, int32_t color, s_b3n_env* env)
 {
 	float		angle;
+	float		step;
+	int			xorigin;
+	int			yorigin;
 
-	int xbase = WIN_WIDTH / 2 - x;
-	int ybase = WIN_HEIGHT / 2 - y;
+	xorigin = WIN_WIDTH / 2 - x;
+	yorigin = WIN_HEIGHT / 2 - y;
+	step = size * M_PI / 360.f;
 	angle = 0.f;
 	while (angle < 360.f)
 	{
-		b3n_put_pixel(color, xbase + (size * cos(RAD(angle))), ybase + (size * sin(RAD(angle))), env);
-		angle += size * M_PI / 360.f;
+		b3n_put_pixel(color, xorigin + (size * cos(RAD(angle))), yorigin + (size * sin(RAD(angle))), env);
+		angle += step;
 	}
 }
 

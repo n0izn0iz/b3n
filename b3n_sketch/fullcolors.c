@@ -24,8 +24,7 @@ int32_t		b3n_color_mix(int32_t col1, int32_t col2, float gain)
 	b = (MID(col2, 0, 8) * gain) + (MID(col1, 0, 8) * (1 - gain));
 	return ((r << 16) + (g << 8) + b);
 }
-
-/*void		b3n_update_colors(s_b3n_light* lights)
+/*void		still_colors(s_b3n_light* lights)
 {
 	static const int32_t	colors[] = {0xFF0000, 0X00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF};
 	static unsigned int		tick_count = 0;
@@ -42,9 +41,9 @@ int32_t		b3n_color_mix(int32_t col1, int32_t col2, float gain)
 	tick_count++;
 }*/
 
-void		b3n_update_colors(s_b3n_light* lights)
+void		color_blend(s_b3n_light* lights)
 {
-	static const int32_t	colors[] = {0xFF0000, 0X00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF};
+	static const int32_t	colors[] = {0xB1CD02, 0x3DBF34, 0X00E0B9, 0x852466, 0xF8235F};
 	static unsigned int		tick_count = 0;
 	int						curr_color;
 	s_b3n_light*			light;
@@ -58,3 +57,11 @@ void		b3n_update_colors(s_b3n_light* lights)
 	}
 	tick_count++;
 }
+
+
+void		b3n_update_colors(s_b3n_light* lights)
+{
+	color_blend(lights);
+}
+
+

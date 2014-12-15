@@ -8,9 +8,9 @@
 
 #define COL_NBR 5
 #ifdef B3N_SIMULATOR
-#define FPC 2000
+#define FPC 200
 #else
-#define FPC 400
+#define FPC 2000
 #endif
 
 int32_t		b3n_color_mix(int32_t col1, int32_t col2, float gain)

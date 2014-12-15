@@ -1,7 +1,6 @@
 #include "b3n.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 
 #define LAST(k,n) ((k) & ((1<<(n))-1))
 #define MID(k,m,n) LAST((k)>>(m),((n)-(m)))
@@ -97,9 +96,51 @@ void		merrygoround(s_b3n_light* lights)
 	tick_count++;
 }
 
+int			b3n_min(int a, int b)
+{
+	return (a < b ? a : b);
+}
+
+int			get_led_offset(int led_nbr, int curr_led, int tgt_led)
+{
+	if (curr_led > tgt_led)
+		return (b3n_min((curr_led - tgt_led), (tgt_led + led_nbr - curr_led)));
+	else
+		return (b3n_min((tgt_led - curr_led), (curr_led + led_nbr - tgt_led)));
+}
+
+void		merrygoround_smooth(s_b3n_light* lights)
+{
+	static const int32_t	colors[] = {0xB1CD02, 0x3DBF34, 0X00E0B9, 0x852466, 0xF8235F};
+	static unsigned int		tick_count = 0;
+	int						curr_color_index;
+	int32_t					curr_color;
+	s_b3n_light*			light;
+	unsigned int			i;
+	unsigned int			tgt_led;
+	int						led_offset;
+
+	curr_color_index = (tick_count / FPC) % COL_NBR;
+	curr_color = b3n_color_mix(colors[curr_color_index], colors[(curr_color_index + 1) % COL_NBR], (tick_count % FPC) / (float)FPC);
+	light = lights;
+	while (light != NULL)
+	{
+		i = 0;
+		tgt_led = (tick_count / (FPC / light->led_nbr)) % light->led_nbr;
+		while (i < light->led_nbr)
+		{
+			led_offset = get_led_offset(light->led_nbr, i, tgt_led);
+			light->colors[i] = b3n_color_mix(0xFFFFFF - curr_color, curr_color, (float)led_offset / (light->led_nbr / 2));
+			i++;
+		}
+		light = light->next;
+	}
+	tick_count++;
+}
+
 void		b3n_update_colors(s_b3n_light* lights)
 {
-	merrygoround(lights);
+	merrygoround_smooth(lights);
 }
 
 

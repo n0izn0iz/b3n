@@ -45,7 +45,7 @@ void loop() {
   {
     int i;
     for (i=0; i < light->led_nbr; i++) {
-      leds.setPixel(curr_led + i, light->color);
+      leds.setPixel(curr_led + i, light->colors[i]);
     }
     curr_led += i + (ledsPerStrip - light->led_nbr);
     light = light->next;

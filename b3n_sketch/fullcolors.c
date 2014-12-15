@@ -7,7 +7,11 @@
 #define MID(k,m,n) LAST((k)>>(m),((n)-(m)))
 
 #define COL_NBR 5
+#ifdef B3N_SIMULATOR
+#define FPC 2000
+#else
 #define FPC 400
+#endif
 
 int32_t		b3n_color_mix(int32_t col1, int32_t col2, float gain)
 {
